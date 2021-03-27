@@ -37,10 +37,14 @@ public class Enemy : MovingObject
     {
         int xDir = 0;
         int yDir = 0;
+        float xDif = Mathf.Abs (target.position.x - transform.position.x);
+        float yDif = Mathf.Abs (target.position.y - transform.position.y) ;
 
-        if (Mathf.Abs (target.position.x - transform.position.x) < float.Epsilon)
+        if ((yDif > float.Epsilon) && (yDif > xDif))
             yDir = target.position.y > transform.position.y ? 1: -1; //Asigna valor de menos 1 si es mayor el transform o de 1 si es menor
-        else 
+
+
+        else if ( xDif > float.Epsilon)
             xDir = target.position.x > transform.position.x ? 1:-1;
 
         AttemptMove <Player> (xDir, yDir);
